@@ -27,8 +27,8 @@
       <q-card class="my-card" style="max-height: 400px; width: 400px">
         <q-img :src="url">   
         </q-img>      
-      </q-card>
-    </q-dialog>
+      </q-card>    
+    </q-dialog> 
       </div>
     </div>
   </div>
@@ -52,16 +52,18 @@ const columns = [
     align: 'left',
     field: row => row.id,
     format: val => `${val}`,
-    sortable: true
+    sortable: true,
+    headerClasses: 'table-row-cus',classes:'table-row-cus',
   },
-  { name: 'name', align: 'center', label: 'Name', field: 'name', sortable: true },
-  { name: 'surname', label: 'Surname', field: 'surname' ,sortable: true },
-  { name: 'phone', label: 'Phone', field: 'phone' },
-  { name: 'city', label: 'City', field: 'city' },
-  { name: 'region', label: 'Region', field: 'region' },
-  { name: 'district', label: 'District', field: 'district' },
-  { name: 'description', label: 'Description',headerStyle: 'max-width: 50px',style: 'max-width: 50px', field: 'description' },
-  { name: 'actions', label: 'Actions', field: '', align:'center' }
+  { name: 'name', align: 'center', label: 'Name',headerClasses: 'table-row-cus',classes:'table-row-cus', field: 'name', sortable: true },
+  { name: 'surname', label: 'Surname',headerClasses: 'table-row-cus',classes:'table-row-cus', field: 'surname' ,sortable: true },
+  { name: 'phone', label: 'Phone', headerClasses: 'table-row-cus',classes:'table-row-cus',field: 'phone' },
+  { name: 'city', label: 'City',headerClasses: 'table-row-cus',classes:'table-row-cus', field: 'city' },
+  { name: 'region', label: 'Region', headerClasses: 'table-row-cus',classes:'table-row-cus',field: 'region' },
+  { name: 'district', label: 'District', headerClasses: 'table-row-cus',classes:'table-row-cus',field: 'district' },
+  { name: 'description', label: 'Description', headerClasses: 'table-row-cus',classes:'table-row-cus', field: 'description' },
+  { name: 'actions', label: 'Actions', field: '',headerClasses: 'table-row-cus',classes:'table-row-cus', align:'center' }
+
 ]
 
     export default{
@@ -156,3 +158,11 @@ const columns = [
 
     }
 </script>
+<style>
+  .table-row-cus{
+    max-width: 150px;
+    white-space: pre-wrap!important;
+    overflow-wrap: break-word;
+    text-align: left;
+  }
+</style>

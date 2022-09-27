@@ -53,11 +53,7 @@ export default {
       }
       },1)
       
-      console.log(val)
     }
-  },
-  mounted(){
-    console.log(this.tab);
   },
   methods: {
     navCancel(e){
