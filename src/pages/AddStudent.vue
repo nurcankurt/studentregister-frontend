@@ -61,21 +61,6 @@
     />
 
     <input type="file" id="file" accept="image/*" />
-    
-
-        <!----<q-file filled bottom-slots  v-model="image" counter accept="image/*" 
-        max-file-size="2000000" @rejected="onRejected">
-        <template v-slot:prepend>
-          <q-icon name="attach_file" @click.stop.prevent />
-        </template>
-        <template v-slot:append>
-          <q-icon name="cancel" @click.stop.prevent="image = null" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint>
-          Less than 2 mb
-        </template>
-      </q-file> -->
 
         <div>
           <q-btn label="Submit" @click = "validate()" color="primary"/>        
@@ -103,7 +88,7 @@ export default defineComponent ( {
   setup (props) {
     const $store = useStore();
 
-      //let image = ref(null)
+
 
       let student = ref({
       name:'',
@@ -118,7 +103,6 @@ export default defineComponent ( {
         if(props.id){
           await api.get("/students/" + props.id)
                 .then(response => {
-                  console.log(response.data);
                     student.value = response.data;
                 });
         }
@@ -147,28 +131,31 @@ export default defineComponent ( {
     
       const myForm = ref(null);
 
-      function validate () {
+      function validate () {            
         myForm.value.validate().then(success => {
           if (success) {
-           addStudent();
-           this.$router.push({ path: '/students'})
-          }
-          else {
-            console.log("invalid")
-          }
-        })
-      }     
+            if(document.getElementById("file").files.length > 0){
+              if(document.getElementById("file").files[0].type.toString().indexOf("image/")>=0){
+                addStudent();
+                this.$router.push({ path: '/students'})
+              }else{
+                $q.notify({
+                color: 'red-5',
+                textColor: 'white',
+                icon: 'warning',
+                message: "File type must be image"
+                })
+                return
+              }
+            }else{
+              addStudent();
+              this.$router.push({ path: '/students'})  
+            }
 
-   
-
-      function onRejected (rejectedEntries) {
-      $q.notify({
-        type: 'negative',
-        message: `File did not pass validation constraints`
-      })
-    }
-
-
+          }        
+          })
+      }
+      
     const $q = useQuasar()
 
     let formData = new FormData()
@@ -177,10 +164,6 @@ export default defineComponent ( {
 
       const inputFile = document.getElementById("file");
       formData.append("image", inputFile.files[0]);
-      console.log(inputFile)
-      /*for (const file of inputFile.files) {
-        formData.append("image", file);
-     }*/
       const unwrapped = JSON.stringify(student.value)
       formData.append('str',unwrapped)
 
@@ -198,7 +181,6 @@ export default defineComponent ( {
               })
       .then(response => {
             if (response.status === 200){
-              console.log("123");
               $q.notify({
               color: 'green-4',
               textColor: 'white',
@@ -253,10 +235,7 @@ export default defineComponent ( {
       filterRegion,
       filterDistrict,
       validate,
-      onRejected,
-      //uploadImage,
       formData,
-      //image,
       myForm,
       states,
       cityOptions,
