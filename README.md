@@ -48,4 +48,5 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 ### Add Student Page
 ![Screenshot (8)](https://user-images.githubusercontent.com/112586484/219859640-8b3f314e-458b-4f03-85cd-bf94e3f8b7b2.png)
 
-
+### Student List Page
+![Screenshot-edited](https://user-images.githubusercontent.com/112586484/219864349-de3beec8-4c03-4bc7-a72f-5446a90faadf.jpg)
